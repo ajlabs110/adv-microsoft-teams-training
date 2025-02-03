@@ -40,7 +40,8 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-dmz-east-us-aj')]"
+        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-dmz-east-us-aj')]",
+        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]"
       ]
     },
     {
@@ -54,7 +55,8 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-server-lan-east-us-aj')]"
+        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-server-lan-east-us-aj')]",
+        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]"
       ]
     },
     {
@@ -68,7 +70,8 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us-aj')]"
+        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us-aj')]",
+        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]"
       ]
     }
   ],
