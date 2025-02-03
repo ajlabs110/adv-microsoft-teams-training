@@ -15,37 +15,37 @@
         },
         "subnets": [
           {
-            "name": "sn-internet-east-us",
+            "name": "sn-internet-east-us-aj",
             "properties": {
               "addressPrefix": "172.21.1.0/24"
             }
           },
           {
-            "name": "sn-transit-east-us",
+            "name": "sn-transit-east-us-aj",
             "properties": {
               "addressPrefix": "172.21.2.0/24"
             }
           },
           {
-            "name": "sn-mgmt-east-us",
+            "name": "sn-mgmt-east-us-aj",
             "properties": {
               "addressPrefix": "172.21.3.0/24"
             }
           },
           {
-            "name": "sn-dmz-east-us",
+            "name": "sn-dmz-east-us-aj",
             "properties": {
               "addressPrefix": "172.21.21.0/24"
             }
           },
           {
-            "name": "sn-server-lan-east-us",
+            "name": "sn-server-lan-east-us-aj",
             "properties": {
               "addressPrefix": "172.21.22.0/24"
             }
           },
           {
-            "name": "sn-access-lan-east-us",
+            "name": "sn-access-lan-east-us-aj",
             "properties": {
               "addressPrefix": "172.21.23.0/24"
             }
