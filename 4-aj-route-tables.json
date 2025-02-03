@@ -64,6 +64,7 @@
         "[resourceId('Microsoft.Network/routeTables', 'rt-sn-dmz-east-us-aj')]"
       ],
       "properties": {
+        "addressPrefix": "172.21.21.0/24",
         "routeTable": {
           "id": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-dmz-east-us-aj')]"
         }
@@ -77,6 +78,7 @@
         "[resourceId('Microsoft.Network/routeTables', 'rt-sn-server-lan-east-us-aj')]"
       ],
       "properties": {
+        "addressPrefix": "172.21.22.0/24",
         "routeTable": {
           "id": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-server-lan-east-us-aj')]"
         }
@@ -90,6 +92,7 @@
         "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us')]"
       ],
       "properties": {
+        "addressPrefix": "172.21.23.0/24",
         "routeTable": {
           "id": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us')]"
         }
