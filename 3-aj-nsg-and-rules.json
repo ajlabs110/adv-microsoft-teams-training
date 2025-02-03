@@ -1,0 +1,208 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2023-05-01",
+      "name": "nsg-sn-internet-east-us-aj",
+      "location": "eastus",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "Allow-HTTPS-Inbound",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "443",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "Allow-RDP-Inbound",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 110,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2023-05-01",
+      "name": "nsg-sn-access-lan-east-us-aj",
+      "location": "eastus",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "Allow-RDP-Inbound",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2023-05-01",
+      "name": "nsg-sn-dmz-east-us-aj",
+      "location": "eastus",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "Allow-RDP-Inbound",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2023-05-01",
+      "name": "nsg-sn-transit-east-us-aj",
+      "location": "eastus",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "Allow-All-Inbound-From-VNet",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "172.21.0.0/16",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2023-05-01",
+      "name": "vn01-east-us/sn-internet-east-us",
+      "properties": {
+        "addressPrefix": "172.21.1.0/24",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-internet-east-us-aj')]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-internet-east-us-aj')]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2023-05-01",
+      "name": "vn01-east-us/sn-transit-east-us",
+      "properties": {
+        "addressPrefix": "172.21.2.0/24",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-transit-east-us-aj')]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-transit-east-us-aj')]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2023-05-01",
+      "name": "vn01-east-us/sn-mgmt-east-us",
+      "properties": {
+        "addressPrefix": "172.21.3.0/24",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-mgmt-east-us-aj')]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-mgmt-east-us-aj')]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2023-05-01",
+      "name": "vn01-east-us/sn-dmz-east-us",
+      "properties": {
+        "addressPrefix": "172.21.21.0/24",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-dmz-east-us-aj')]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-dmz-east-us-aj')]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2023-05-01",
+      "name": "vn01-east-us/sn-server-lan-east-us",
+      "properties": {
+        "addressPrefix": "172.21.22.0/24",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-server-lan-east-us-aj')]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-server-lan-east-us-aj')]"
+      ]
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2023-05-01",
+      "name": "vn01-east-us/sn-access-lan-east-us",
+      "properties": {
+        "addressPrefix": "172.21.23.0/24",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-access-lan-east-us-aj')]"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-access-lan-east-us-aj')]"
+      ]
+    }
+  ],
+  "outputs": {
+    "nsgIds": {
+      "type": "object",
+      "value": {
+        "nsgInternet": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-internet-east-us-aj')]",
+        "nsgTransit": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-transit-east-us-aj')]",
+        "nsgMgmt": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-mgmt-east-us-aj')]",
+        "nsgDmz": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-dmz-east-us-aj')]",
+        "nsgServerLan": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-server-lan-east-us-aj')]",
+        "nsgAccessLan": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-access-lan-east-us-aj')]"
+      }
+    }
+  }
+}
