@@ -117,6 +117,15 @@
       }
     },
     {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2023-05-01",
+      "name": "nsg-sn-server-lan-east-us-aj",
+      "location": "eastus",
+      "properties": {
+        "securityRules": [] // Add rules here if needed
+      }
+    },
+    {
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2023-05-01",
       "name": "vn01-east-us-aj",
