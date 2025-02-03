@@ -41,7 +41,7 @@
     {
       "type": "Microsoft.Network/routeTables",
       "apiVersion": "2023-05-01",
-      "name": "rt-sn-access-lan-east-us",
+      "name": "rt-sn-access-lan-east-us-aj",
       "location": "eastus",
       "properties": {
         "routes": [
