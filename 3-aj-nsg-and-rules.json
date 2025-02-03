@@ -108,91 +108,97 @@
       }
     },
     {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2023-05-01",
-      "name": "vn01-east-us/sn-internet-east-us",
+      "name": "nsg-sn-mgmt-east-us-aj",
+      "location": "eastus",
       "properties": {
-        "addressPrefix": "172.21.1.0/24",
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-internet-east-us-aj')]"
-        }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-internet-east-us-aj')]"
-      ]
+        "securityRules": [] // Add rules here if needed
+      }
     },
     {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2023-05-01",
-      "name": "vn01-east-us/sn-transit-east-us",
+      "name": "vn01-east-us-aj",
+      "location": "eastus",
       "properties": {
-        "addressPrefix": "172.21.2.0/24",
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-transit-east-us-aj')]"
-        }
+        "addressSpace": {
+          "addressPrefixes": [
+            "172.21.0.0/16"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "sn-internet-east-us-aj",
+            "properties": {
+              "addressPrefix": "172.21.1.0/24",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-internet-east-us-aj')]"
+              }
+            }
+          },
+          {
+            "name": "sn-transit-east-us-aj",
+            "properties": {
+              "addressPrefix": "172.21.2.0/24",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-transit-east-us-aj')]"
+              }
+            }
+          },
+          {
+            "name": "sn-mgmt-east-us-aj",
+            "properties": {
+              "addressPrefix": "172.21.3.0/24",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-mgmt-east-us-aj')]"
+              }
+            }
+          },
+          {
+            "name": "sn-dmz-east-us-aj",
+            "properties": {
+              "addressPrefix": "172.21.21.0/24",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-dmz-east-us-aj')]"
+              }
+            }
+          },
+          {
+            "name": "sn-server-lan-east-us-aj",
+            "properties": {
+              "addressPrefix": "172.21.22.0/24",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-server-lan-east-us-aj')]"
+              }
+            }
+          },
+          {
+            "name": "sn-access-lan-east-us-aj",
+            "properties": {
+              "addressPrefix": "172.21.23.0/24",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-access-lan-east-us-aj')]"
+              }
+            }
+          }
+        ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-transit-east-us-aj')]"
-      ]
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
-      "apiVersion": "2023-05-01",
-      "name": "vn01-east-us/sn-mgmt-east-us",
-      "properties": {
-        "addressPrefix": "172.21.3.0/24",
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-mgmt-east-us-aj')]"
-        }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-mgmt-east-us-aj')]"
-      ]
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
-      "apiVersion": "2023-05-01",
-      "name": "vn01-east-us/sn-dmz-east-us",
-      "properties": {
-        "addressPrefix": "172.21.21.0/24",
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-dmz-east-us-aj')]"
-        }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-dmz-east-us-aj')]"
-      ]
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
-      "apiVersion": "2023-05-01",
-      "name": "vn01-east-us/sn-server-lan-east-us",
-      "properties": {
-        "addressPrefix": "172.21.22.0/24",
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-server-lan-east-us-aj')]"
-        }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-server-lan-east-us-aj')]"
-      ]
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
-      "apiVersion": "2023-05-01",
-      "name": "vn01-east-us/sn-access-lan-east-us",
-      "properties": {
-        "addressPrefix": "172.21.23.0/24",
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-access-lan-east-us-aj')]"
-        }
-      },
-      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-internet-east-us-aj')]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-transit-east-us-aj')]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-mgmt-east-us-aj')]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-dmz-east-us-aj')]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-server-lan-east-us-aj')]",
         "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-access-lan-east-us-aj')]"
       ]
     }
   ],
   "outputs": {
+    "vnetName": {
+      "type": "string",
+      "value": "vn01-east-us-aj"
+    },
     "nsgIds": {
       "type": "object",
       "value": {
