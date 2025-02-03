@@ -3,25 +3,21 @@
   "contentVersion": "1.0.0.0",
   "resources": [
     {
-      "type": "Microsoft.Network/virtualNetworks",
-      "apiVersion": "2023-05-01",
-      "name": "vn01-east-us-aj",
-      "location": "eastus",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "172.21.20.0/22"
-          ]
-        }
-      }
-    },
-    {
       "type": "Microsoft.Network/routeTables",
       "apiVersion": "2023-05-01",
       "name": "rt-sn-dmz-east-us-aj",
       "location": "eastus",
       "properties": {
-        "routes": []
+        "routes": [
+          {
+            "name": "Default",
+            "properties": {
+              "addressPrefix": "0.0.0.0/0",
+              "nextHopType": "VirtualAppliance",
+              "nextHopIpAddress": "172.21.3.4"
+            }
+          }
+        ]
       }
     },
     {
@@ -30,72 +26,74 @@
       "name": "rt-sn-server-lan-east-us-aj",
       "location": "eastus",
       "properties": {
-        "routes": []
+        "routes": [
+          {
+            "name": "Default",
+            "properties": {
+              "addressPrefix": "0.0.0.0/0",
+              "nextHopType": "VirtualAppliance",
+              "nextHopIpAddress": "172.21.3.4"
+            }
+          }
+        ]
       }
     },
     {
       "type": "Microsoft.Network/routeTables",
       "apiVersion": "2023-05-01",
-      "name": "rt-sn-access-lan-east-us-aj",
+      "name": "rt-sn-access-lan-east-us",
       "location": "eastus",
       "properties": {
-        "routes": []
+        "routes": [
+          {
+            "name": "Default",
+            "properties": {
+              "addressPrefix": "0.0.0.0/0",
+              "nextHopType": "VirtualAppliance",
+              "nextHopIpAddress": "172.21.3.4"
+            }
+          }
+        ]
       }
     },
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2023-05-01",
       "name": "vn01-east-us-aj/sn-dmz-east-us-aj",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-dmz-east-us-aj')]"
+      ],
       "properties": {
-        "addressPrefix": "172.21.21.0/24",
         "routeTable": {
           "id": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-dmz-east-us-aj')]"
         }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]",
-        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-dmz-east-us-aj')]"
-      ]
+      }
     },
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2023-05-01",
       "name": "vn01-east-us-aj/sn-server-lan-east-us-aj",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-server-lan-east-us-aj')]"
+      ],
       "properties": {
-        "addressPrefix": "172.21.22.0/24",
         "routeTable": {
           "id": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-server-lan-east-us-aj')]"
         }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]",
-        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-server-lan-east-us-aj')]"
-      ]
+      }
     },
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2023-05-01",
       "name": "vn01-east-us-aj/sn-access-lan-east-us-aj",
-      "properties": {
-        "addressPrefix": "172.21.23.0/24",
-        "routeTable": {
-          "id": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us-aj')]"
-        }
-      },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]",
-        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us-aj')]"
-      ]
-    }
-  ],
-  "outputs": {
-    "routeTableIds": {
-      "type": "object",
-      "value": {
-        "rtDmz": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-dmz-east-us-aj')]",
-        "rtServerLan": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-server-lan-east-us-aj')]",
-        "rtAccessLan": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us-aj')]"
+        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us')]"
+      ],
+      "properties": {
+        "routeTable": {
+          "id": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us')]"
+        }
       }
     }
-  }
+  ]
 }
