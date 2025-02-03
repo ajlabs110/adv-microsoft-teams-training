@@ -3,12 +3,25 @@
   "contentVersion": "1.0.0.0",
   "resources": [
     {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2023-05-01",
+      "name": "vn01-east-us-aj",
+      "location": "eastus",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "172.21.20.0/22"
+          ]
+        }
+      }
+    },
+    {
       "type": "Microsoft.Network/routeTables",
       "apiVersion": "2023-05-01",
       "name": "rt-sn-dmz-east-us-aj",
       "location": "eastus",
       "properties": {
-        "routes": [] // Add routes here if needed
+        "routes": []
       }
     },
     {
@@ -17,7 +30,7 @@
       "name": "rt-sn-server-lan-east-us-aj",
       "location": "eastus",
       "properties": {
-        "routes": [] // Add routes here if needed
+        "routes": []
       }
     },
     {
@@ -26,7 +39,7 @@
       "name": "rt-sn-access-lan-east-us-aj",
       "location": "eastus",
       "properties": {
-        "routes": [] // Add routes here if needed
+        "routes": []
       }
     },
     {
@@ -40,8 +53,8 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-dmz-east-us-aj')]",
-        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]"
+        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]",
+        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-dmz-east-us-aj')]"
       ]
     },
     {
@@ -55,8 +68,8 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-server-lan-east-us-aj')]",
-        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]"
+        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]",
+        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-server-lan-east-us-aj')]"
       ]
     },
     {
@@ -70,8 +83,8 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us-aj')]",
-        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]"
+        "[resourceId('Microsoft.Network/virtualNetworks', 'vn01-east-us-aj')]",
+        "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us-aj')]"
       ]
     }
   ],
