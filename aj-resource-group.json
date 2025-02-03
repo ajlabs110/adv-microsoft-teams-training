@@ -4,9 +4,9 @@
   "parameters": {
     "resourceGroupName": {
       "type": "string",
-      "defaultValue": "MyResourceGroup",
+      "defaultValue": "rg-generic-aj",
       "metadata": {
-        "description": "Name of the Resource Group"
+        "description": "Generic Resourse Group"
       }
     },
     "location": {
