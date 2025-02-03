@@ -71,6 +71,33 @@
       }
     },
     {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2023-05-01",
+      "name": "nsg-sn-dmz-east-us-aj",
+      "location": "eastus",
+      "properties": {
+        "securityRules": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2023-05-01",
+      "name": "nsg-sn-server-lan-east-us-aj",
+      "location": "eastus",
+      "properties": {
+        "securityRules": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2023-05-01",
+      "name": "nsg-sn-access-lan-east-us-aj",
+      "location": "eastus",
+      "properties": {
+        "securityRules": []
+      }
+    },
+    {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2023-05-01",
       "name": "[concat('ExistingVNetName', '/sn-internet-east-us-aj')]",
@@ -78,10 +105,7 @@
         "networkSecurityGroup": {
           "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-internet-east-us-aj')]"
         }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-internet-east-us-aj')]"
-      ]
+      }
     },
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
@@ -91,10 +115,7 @@
         "networkSecurityGroup": {
           "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-transit-east-us-aj')]"
         }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-transit-east-us-aj')]"
-      ]
+      }
     },
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
@@ -104,10 +125,37 @@
         "networkSecurityGroup": {
           "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-mgmt-east-us-aj')]"
         }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-mgmt-east-us-aj')]"
-      ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2023-05-01",
+      "name": "[concat('ExistingVNetName', '/sn-dmz-east-us-aj')]",
+      "properties": {
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-dmz-east-us-aj')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2023-05-01",
+      "name": "[concat('ExistingVNetName', '/sn-server-lan-east-us-aj')]",
+      "properties": {
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-server-lan-east-us-aj')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2023-05-01",
+      "name": "[concat('ExistingVNetName', '/sn-access-lan-east-us-aj')]",
+      "properties": {
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-access-lan-east-us-aj')]"
+        }
+      }
     }
   ],
   "outputs": {
@@ -116,7 +164,10 @@
       "value": {
         "nsgInternet": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-internet-east-us-aj')]",
         "nsgTransit": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-transit-east-us-aj')]",
-        "nsgMgmt": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-mgmt-east-us-aj')]"
+        "nsgMgmt": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-mgmt-east-us-aj')]",
+        "nsgDmz": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-dmz-east-us-aj')]",
+        "nsgServerLan": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-server-lan-east-us-aj')]",
+        "nsgAccessLan": "[resourceId('Microsoft.Network/networkSecurityGroups', 'nsg-sn-access-lan-east-us-aj')]"
       }
     }
   }
