@@ -1,63 +1,63 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "resources": [
-      {
-        "type": "Microsoft.Network/virtualNetworks",
-        "apiVersion": "2023-05-01",
-        "name": "vnet-east-us",
-        "location": "eastus",
-        "properties": {
-          "addressSpace": {
-            "addressPrefixes": [
-              "172.21.0.0/16"
-            ]
-          },
-          "subnets": [
-            {
-              "name": "sn-internet-east-us-aj",
-              "properties": {
-                "addressPrefix": "172.21.11.0/24"
-              }
-            },
-            {
-              "name": "sn-transit-east-us-aj",
-              "properties": {
-                "addressPrefix": "172.21.12.0/24"
-              }
-            },
-            {
-              "name": "sn-mgmt-east-us-aj",
-              "properties": {
-                "addressPrefix": "172.21.13.0/24"
-              }
-            },
-            {
-              "name": "sn-dmz-east-us-aj",
-              "properties": {
-                "addressPrefix": "172.21.121.0/24"
-              }
-            },
-            {
-              "name": "sn-server-lan-east-us-aj",
-              "properties": {
-                "addressPrefix": "172.21.122.0/24"
-              }
-            },
-            {
-              "name": "sn-access-lan-east-us-aj",
-              "properties": {
-                "addressPrefix": "172.21.123.0/24"
-              }
-            }
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2023-05-01",
+      "name": "vn01-east-us-aj",
+      "location": "eastus",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "172.21.0.0/16"
           ]
-        }
-      }
-    ],
-    "outputs": {
-      "vnetName": {
-        "type": "string",
-        "value": "vn01-east-us-aj"
+        },
+        "subnets": [
+          {
+            "name": "sn-internet-east-us",
+            "properties": {
+              "addressPrefix": "172.21.1.0/24"
+            }
+          },
+          {
+            "name": "sn-transit-east-us",
+            "properties": {
+              "addressPrefix": "172.21.2.0/24"
+            }
+          },
+          {
+            "name": "sn-mgmt-east-us",
+            "properties": {
+              "addressPrefix": "172.21.3.0/24"
+            }
+          },
+          {
+            "name": "sn-dmz-east-us",
+            "properties": {
+              "addressPrefix": "172.21.21.0/24"
+            }
+          },
+          {
+            "name": "sn-server-lan-east-us",
+            "properties": {
+              "addressPrefix": "172.21.22.0/24"
+            }
+          },
+          {
+            "name": "sn-access-lan-east-us",
+            "properties": {
+              "addressPrefix": "172.21.23.0/24"
+            }
+          }
+        ]
       }
     }
+  ],
+  "outputs": {
+    "vnetName": {
+      "type": "string",
+      "value": "vn01-east-us-aj"
+    }
   }
+}
