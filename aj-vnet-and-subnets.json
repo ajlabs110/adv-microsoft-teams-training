@@ -57,7 +57,7 @@
     "outputs": {
       "vnetName": {
         "type": "string",
-        "value": "vn01-east-us"
+        "value": "vn01-east-us-aj"
       }
     }
   }
