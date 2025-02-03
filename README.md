@@ -11,3 +11,6 @@
 
 ## Deploy Route Table
 [![Deploy to Route Table](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fajlabs110%2Fadv-microsoft-teams-training%2Fmain%2F4-aj-route-tables.json)
+
+## Associate Route Table to Subnets
+[![Deploy to Route Table](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fajlabs110%2Fadv-microsoft-teams-training%2Fmain%2F4-aj-route-tables.json)
