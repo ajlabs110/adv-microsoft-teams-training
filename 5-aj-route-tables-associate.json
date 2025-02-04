@@ -1,57 +1,37 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
-  "parameters": {
-    "resourceGroupName": {
-      "type": "string",
-      "defaultValue": "your-resource-group-name",
-      "metadata": {
-        "description": "Resource Group where resources are deployed"
-      }
-    },
-    "location": {
-      "type": "string",
-      "defaultValue": "eastus",
-      "metadata": {
-        "description": "Azure Region"
-      }
-    },
-    "vnetName": {
-      "type": "string",
-      "defaultValue": "vn01-east-us-aj",
-      "metadata": {
-        "description": "Name of the existing Virtual Network"
-      }
-    }
-  },
   "resources": [
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2023-05-01",
-      "name": "[concat(parameters('vnetName'), '/sn-dmz-east-us-aj')]",
+      "name": "vn01-east-us-aj/sn-dmz-east-us-aj",
+      "location": "eastus",
       "properties": {
         "routeTable": {
-          "id": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-dmz-east-us-aj')]"
+          "id": "/subscriptions/e0de652f-d4e1-4d29-8bba-db5db4c04734/resourceGroups/rg-generic/providers/Microsoft.Network/routeTables/rt-sn-dmz-east-us-aj"
         }
       }
     },
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2023-05-01",
-      "name": "[concat(parameters('vnetName'), '/sn-server-lan-east-us-aj')]",
+      "name": "vn01-east-us-aj/sn-server-lan-east-us-aj",
+      "location": "eastus",
       "properties": {
         "routeTable": {
-          "id": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-server-lan-east-us-aj')]"
+          "id": "/subscriptions/e0de652f-d4e1-4d29-8bba-db5db4c04734/resourceGroups/rg-generic/providers/Microsoft.Network/routeTables/rt-sn-server-lan-east-us-aj"
         }
       }
     },
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2023-05-01",
-      "name": "[concat(parameters('vnetName'), '/sn-access-lan-east-us-aj')]",
+      "name": "vn01-east-us-aj/sn-access-lan-east-us-aj",
+      "location": "eastus",
       "properties": {
         "routeTable": {
-          "id": "[resourceId('Microsoft.Network/routeTables', 'rt-sn-access-lan-east-us-aj')]"
+          "id": "/subscriptions/e0de652f-d4e1-4d29-8bba-db5db4c04734/resourceGroups/rg-generic/providers/Microsoft.Network/routeTables/rt-sn-access-lan-east-us-aj"
         }
       }
     }
